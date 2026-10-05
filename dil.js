@@ -1,7 +1,7 @@
-/*! prof-dil v1.0.0 · rendu de leçons pour le prof IA d'Abdallah · MIT */
+/*! prof-dil v1.1.0 · rendu de leçons pour le prof IA d'Abdallah · MIT */
 (function () {
   "use strict";
-  var VERSION = "1.0.0";
+  var VERSION = "1.2.0";
   var KATEX = "https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js";
 
   /* ---------- styles ---------- */
@@ -10,7 +10,7 @@
     "--d-acc:#2563EB;--d-acc-bg:#EAF1FF;--d-ok:#15803D;--d-ok-bg:#E7F6EC;--d-bad:#B91C1C;--d-bad-bg:#FDECEC;--d-warn:#B45309;--d-warn-bg:#FEF3C7;--d-vio:#7C3AED;--d-vio-bg:#F1EAFE;",
     "font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',system-ui,Roboto,Helvetica,Arial,sans-serif;font-size:16px;line-height:1.6;color:var(--d-fg);display:flex;flex-direction:column;gap:16px;padding:4px 0 8px;-webkit-font-smoothing:antialiased}",
     "@media (prefers-color-scheme:dark){.dil{--d-fg:var(--text-primary,#ececec);--d-mut:var(--text-secondary,#a3a3a3);--d-line:var(--border,#3a3a3a);--d-soft:var(--surface-1,#2a2a2a);--d-card:var(--surface-2,#1f1f1f);",
-    "--d-acc:#7FA8FF;--d-acc-bg:rgba(96,140,255,.16);--d-ok:#5FD196;--d-ok-bg:rgba(60,190,120,.15);--d-bad:#F59292;--d-bad-bg:rgba(240,90,90,.15);--d-warn:#F2C062;--d-warn-bg:rgba(240,180,60,.15);--d-vio:#B9A0FF;--d-vio-bg:rgba(150,110,255,.16)}}",
+    "--d-acc:#7FA8FF;--d-acc-bg:rgba(96,140,255,.16);--d-ok:#5FD196;--d-ok-bg:rgba(60,1.1.020,.15);--d-bad:#F59292;--d-bad-bg:rgba(240,90,90,.15);--d-warn:#F2C062;--d-warn-bg:rgba(240,180,60,.15);--d-vio:#B9A0FF;--d-vio-bg:rgba(150,110,255,.16)}}",
     ".dil *{box-sizing:border-box}.dil p{margin:0}",
     ".dil .h{margin:6px 0 0;font-weight:650;line-height:1.25;letter-spacing:-.01em;text-wrap:balance}",
     ".dil .h.sm{font-size:16px}.dil .h.md{font-size:18px}.dil .h.lg{font-size:21px}.dil .h.xl{font-size:25px}.dil .h.x2{font-size:31px}",
@@ -27,7 +27,7 @@
     ".dil .c-acc{color:var(--d-acc)}.dil .c-ok{color:var(--d-ok)}.dil .c-bad{color:var(--d-bad)}.dil .c-warn{color:var(--d-warn)}.dil .c-vio{color:var(--d-vio)}.dil .c-neutral{color:var(--d-mut)}",
     ".dil .badge{align-self:flex-start;display:inline-flex;align-items:center;font-size:12.5px;font-weight:600;padding:3px 10px;border-radius:999px;white-space:nowrap}",
     ".dil .row{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}.dil .row>*{flex:1 1 140px;min-width:0}",
-    ".dil .row.between{justify-content:space-between;align-items:center}.dil .row.between>*{flex:0 1 auto}",
+    ".dil .row.between{justify-content:space-between;align-items:center}.dil .row.between>*{flex:0 1 auto}.dil .row>.badge{flex:0 0 auto}",
     ".dil .col{display:flex;flex-direction:column;gap:6px;min-width:0}",
     ".dil .grid{display:grid;gap:12px}",
     ".dil .tile{background:var(--d-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:2px;min-width:0}",
@@ -52,13 +52,19 @@
     ".dil .leaf{width:100%;text-align:center;padding:8px;border-radius:10px;border:1.5px solid currentColor;font-size:15px}",
     ".dil .opts{display:flex;flex-direction:column;gap:8px}",
     ".dil .opt{display:flex;gap:12px;align-items:center;padding:11px 14px;border:1.5px solid var(--d-line);border-radius:12px;font-size:15.5px;cursor:pointer;background:var(--d-card);transition:border-color .12s}",
-    ".dil .opt:hover{border-color:var(--d-acc)}.dil .opt.sel{border-color:var(--d-acc);background:var(--d-acc-bg)}",
+    ".dil .opt:hover{border-color:var(--d-acc)!important}.dil .opt.sel{border-color:var(--d-acc)!important;background:var(--d-acc-bg)!important}",
     ".dil .opt .rk{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--d-mut);display:flex;align-items:center;justify-content:center}",
-    ".dil .opt.sel .rk{border-color:var(--d-acc)}.dil .opt.sel .rk::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--d-acc)}",
-    ".dil .btn{font:inherit;font-size:15px;font-weight:600;padding:11px 16px;border-radius:999px;border:none;background:var(--d-fg);color:var(--d-card);cursor:pointer;width:100%}",
-    ".dil .btn.ghost{background:transparent;color:var(--d-fg);border:1.5px solid var(--d-line);width:auto}",
+    ".dil .opt.sel .rk{border-color:var(--d-acc)!important}.dil .opt.sel .rk::after{content:'';width:9px;height:9px;border-radius:50%;background:var(--d-acc)}",
+    ".dil button.btn{font:inherit!important;font-size:15px!important;font-weight:600!important;padding:11px 16px!important;border-radius:999px!important;border:none!important;background:var(--d-fg)!important;color:var(--d-card)!important;cursor:pointer;width:100%;height:auto!important;opacity:1!important}",
+    ".dil button.btn:disabled{opacity:.55!important;cursor:default}",
+    ".dil button.btn.ghost{background:transparent!important;color:var(--d-fg)!important;border:1.5px solid var(--d-line)!important;width:auto}",
+    ".dil button.btn.ghost:hover{border-color:var(--d-acc)!important}",
     ".dil .btn:focus-visible,.dil .opt:focus-visible,.dil textarea:focus-visible,.dil input:focus-visible{outline:2px solid var(--d-acc);outline-offset:2px}",
     ".dil .btns{display:flex;gap:8px;flex-wrap:wrap}",
+    ".dil .pc{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}.dil .pv{background:var(--d-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px;min-width:0}.dil .pv .ph{display:flex;justify-content:space-between;gap:8px;font-weight:650;font-size:15px}.dil .pv .ph span:last-child{color:var(--d-mut);font-weight:500;font-variant-numeric:tabular-nums}.dil .chl{display:flex;flex-direction:column;gap:4px;margin:0;padding:0;list-style:none}.dil .chl li{display:flex;gap:8px;align-items:flex-start;font-size:14px;line-height:1.4;color:var(--d-mut)}.dil .chl li i{flex:none;width:16px;height:16px;border-radius:50%;margin-top:2px;border:1.5px solid var(--d-line);display:flex;align-items:center;justify-content:center;font-style:normal;font-size:10px}.dil .chl li.fait{color:var(--d-fg)}.dil .chl li.fait i{background:var(--d-ok);border-color:var(--d-ok);color:#fff}.dil .chl li.encours{color:var(--d-fg);font-weight:650}.dil .chl li.encours i{border-color:var(--d-acc);background:var(--d-acc-bg);box-shadow:0 0 0 3px var(--d-acc-bg)}.dil .pv .nx{font-size:13.5px;color:var(--d-mut)}",
+    ".sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}",
+    ".dil .chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}.dil .chip{font-size:13.5px;font-weight:550;padding:3px 10px;border-radius:999px;line-height:1.4}",
+    ".dil .plan{background:var(--d-soft);border-radius:12px;padding:12px 14px;display:flex;flex-direction:column;gap:8px}.dil .plan .tl{font-size:13px;color:var(--d-mut);margin:0}",
     ".dil .err{font-size:13.5px;color:var(--d-bad);min-height:0}",
     ".dil textarea,.dil input.in{font:inherit;font-size:15.5px;width:100%;padding:10px 12px;border-radius:12px;border:1.5px solid var(--d-line);background:var(--d-card);color:var(--d-fg)}",
     ".dil .bars{display:flex;flex-direction:column;gap:10px}.dil .brow{display:grid;grid-template-columns:minmax(70px,30%) 1fr auto;gap:10px;align-items:center;font-size:14.5px}",
@@ -154,12 +160,12 @@
         var col = attr(n, "color"); ball.style.background = col ? col : "var(--d-" + tone(attr(n, "tone"), "acc") + ")"; e.appendChild(ball);
         if (attr(n, "label")) e.appendChild(el("span", "dl", attr(n, "label"))); if (attr(n, "sub")) e.appendChild(el("span", "ds", attr(n, "sub"))); return e;
       case "progress": case "progression":
-        e = el("div", "prog"); var lab = attr(n, "label"), v = Math.max(0, Math.min(100, +attr(n, "value", 0)));
+        e = el("div", "prog"); var lab = attr(n, "label"), v = Math.max(0, Math.min(100, parseFloat(String(attr(n, "value", 0)).replace(",", ".")) || 0));
         if (lab) { var pt = el("div", "pt"); pt.appendChild(el("span", null, lab)); pt.appendChild(el("span", null, attr(n, "text", Math.round(v) + " %"))); e.appendChild(pt); }
         var bar = el("div", "bar"), fill = el("i"); fill.style.width = v + "%"; fill.style.background = "var(--d-" + tone(attr(n, "tone"), "acc") + ")"; bar.appendChild(fill); e.appendChild(bar); return e;
       case "steps": case "list":
         var num = attr(n, "type", tag === "steps" ? "number" : "bullet");
-        if (num === "bullet") { e = el("ul", "bl"); Array.prototype.forEach.call(n.children, function (c) { e.appendChild(inline(c, "li")); }); return e; }
+        if (/^(bullet|ul|puce|puces|disc|dot)$/i.test(num)) { e = el("ul", "bl"); Array.prototype.forEach.call(n.children, function (c) { e.appendChild(inline(c, "li")); }); return e; }
         e = el("div", "steps" + (attr(n, "line") != null || tag === "steps" ? " line" : "")); var k = 0;
         Array.prototype.forEach.call(n.children, function (c) { k++; var s = el("div", "step"); s.appendChild(el("span", "sn", attr(c, "n", String(k)))); s.appendChild(kids(c, el("div", "sc"))); e.appendChild(s); }); return e;
       case "table": e = el("div", "tbl"); var tb = el("table"); Array.prototype.forEach.call(n.children, function (r) { var tr = el("tr"); Array.prototype.forEach.call(r.children, function (c) { tr.appendChild(inline(c, c.localName.toLowerCase() === "th" ? "th" : "td")); }); tb.appendChild(tr); }); e.appendChild(tb); return e;
@@ -177,6 +183,7 @@
         e = el("div", "btns"); Array.prototype.forEach.call(n.children, function (b) { var bt = el("button", "btn ghost", b.textContent.trim()); bt.type = "button"; bt.onclick = function () { send(withTime(b, attr(b, "send", b.textContent.trim()))); bt.parentNode.appendChild(el("span", "sent", "Envoyé")); }; e.appendChild(bt); }); return e;
       case "checkpoint": return checkpoint(n);
       case "reprise": return reprise(n);
+      case "parcours": return parcours(n);
       case "raw": e = el("div"); e.innerHTML = n.textContent; return e;
       default: return kids(n, el("div"));
     }
@@ -208,17 +215,27 @@
     box.appendChild(ta); box.appendChild(b); box.appendChild(err); return box;
   }
 
-  function elapsed(start) {
-    var m = /^(\d{1,2})[h:](\d{2})$/.exec(start || ""); if (!m) return null;
-    var d = new Date(), s = new Date(); s.setHours(+m[1], +m[2], 0, 0); var min = Math.round((d - s) / 60000); if (min < 0) min += 1440;
-    return min >= 60 ? Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0") : min + " min";
+  function elapsedMin(start) {
+    var m = /^\s*(\d{1,2})\s*[h:]\s*(\d{2})\s*$/.exec(start || ""); if (!m) return null;
+    var d = new Date(), s = new Date(); s.setHours(+m[1], +m[2], 0, 0); var min = Math.round((d - s) / 60000); if (min < 0) min += 1440; return min;
   }
+  function fmtMin(min) { return min >= 60 ? Math.floor(min / 60) + " h " + String(min % 60).padStart(2, "0") : min + " min"; }
+  function elapsed(start) { var m = elapsedMin(start); return m == null ? null : fmtMin(m); }
+  function durMin(s) { s = String(s || "").toLowerCase().replace(/\s+/g, ""); var m;
+    if ((m = /^(\d+)h(\d+)?(min)?$/.exec(s))) return +m[1] * 60 + (+m[2] || 0);
+    if ((m = /^(\d+)(min|mn|m)$/.exec(s))) return +m[1];
+    if ((m = /^(\d+(?:[.,]\d+)?)h$/.exec(s))) return Math.round(parseFloat(m[1].replace(",", ".")) * 60);
+    return null; }
 
   function checkpoint(n) {
     var c = el("div", "card t-acc"); var top = el("div", "row between");
     top.appendChild(el("span", "badge bg-acc c-acc", attr(n, "pos", "Checkpoint")));
     var el2 = elapsed(attr(n, "start")); if (el2) top.appendChild(el("span", "sec small", "Séance : " + el2)); c.appendChild(top);
-    if (attr(n, "seance") != null) c.appendChild(render(mk("progress", { label: "Séance", value: attr(n, "seance") })));
+    var se = attr(n, "seance");
+    if (se != null) { var pct = null, txt = null, dm = durMin(se), em = elapsedMin(attr(n, "start"));
+      if (/^\s*\d+(?:[.,]\d+)?\s*%?\s*$/.test(se)) pct = parseFloat(se.replace(",", "."));
+      else if (dm && em != null) { pct = Math.min(100, Math.round(em / dm * 100)); txt = fmtMin(Math.min(em, dm)) + " sur " + fmtMin(dm); }
+      if (pct != null && !isNaN(pct)) c.appendChild(render(mk("progress", { label: "Séance", value: String(pct), text: txt }))); }
     if (attr(n, "voie1") != null) c.appendChild(render(mk("progress", { label: attr(n, "voie1label", "Voie 1 · cours"), value: attr(n, "voie1"), text: attr(n, "voie1text") })));
     if (attr(n, "voie2") != null) c.appendChild(render(mk("progress", { label: attr(n, "voie2label", "Voie 2 · socle maths"), value: attr(n, "voie2"), tone: "ok", text: attr(n, "voie2text") })));
     if (attr(n, "acquis") || attr(n, "consolider")) {
@@ -230,20 +247,45 @@
   function note(t, title, txt) { var d = el("div", "note t-" + t); d.style.padding = "10px 12px"; d.style.gap = "2px"; d.appendChild(el("p", "nt c-" + t, title)); d.appendChild(el("p", "small", txt)); return d; }
   function mk(tag, a) { var d = document.createElement(tag); Object.keys(a).forEach(function (k) { if (a[k] != null) d.setAttribute(k, a[k]); }); return d; }
 
+  function splitList(s) {
+    s = String(s); var seps = /[·•;|]/.test(s) ? "·•;|" : ",", out = [], cur = "", depth = 0;
+    for (var i = 0; i < s.length; i++) { var ch = s[i]; if ("([{".indexOf(ch) >= 0) depth++; else if (")]}".indexOf(ch) >= 0) depth = Math.max(0, depth - 1);
+      if (depth === 0 && seps.indexOf(ch) >= 0 && !(ch === "," && /\d/.test(s[i + 1] || ""))) { out.push(cur); cur = ""; } else cur += ch; }
+    out.push(cur); return out.map(function (x) { return x.replace(/^\s*\d+[.)]\s*/, "").trim(); }).filter(Boolean); }
+  function dur(d) { d = d.trim(); if (!d) return ""; if (/^\d+$/.test(d)) { var m = +d; return m < 60 ? m + " min" : Math.floor(m / 60) + " h" + (m % 60 ? " " + (m % 60) : ""); } return d; }
+  function parcours(n) {
+    var wrap = el("div", "col"); wrap.style.gap = "10px";
+    if (attr(n, "titre")) wrap.appendChild(el("p", "h md", attr(n, "titre")));
+    var g = el("div", "pc");
+    Array.prototype.forEach.call(n.children, function (v) {
+      if (v.localName.toLowerCase() !== "voie") return;
+      var box = el("div", "pv"), hd = el("div", "ph"), chs = Array.prototype.filter.call(v.children, function (c) { return c.localName.toLowerCase() === "ch"; });
+      var done = chs.filter(function (c) { return /^(fait|ok|acquis)$/i.test(attr(c, "etat", "")); }).length, cur = chs.filter(function (c) { return /^(encours|en cours|cours)$/i.test(attr(c, "etat", "")); }).length;
+      var pct = attr(v, "pct") != null ? attr(v, "pct") : (chs.length ? Math.round((done + cur * 0.5) / chs.length * 100) : 0);
+      hd.appendChild(el("span", null, attr(v, "titre", "Voie"))); hd.appendChild(el("span", null, (chs.length ? done + " / " + chs.length + " · " : "") + Math.round(+pct) + " %")); box.appendChild(hd);
+      box.appendChild(render(mk("progress", { value: String(pct), tone: attr(v, "tone", "acc") })));
+      var ul = el("ul", "chl");
+      chs.forEach(function (c) { var st = (attr(c, "etat", "afaire") || "").toLowerCase().replace(/\s+/g, ""); var cls = /^(fait|ok|acquis)$/.test(st) ? "fait" : (/^(encours|cours)$/.test(st) ? "encours" : "afaire"); var li = el("li", cls); li.appendChild(el("i", null, cls === "fait" ? "✓" : "")); var t = el("span"); kids(c, t); if (cls === "encours") t.appendChild(el("span", "sec", " · on est ici")); li.appendChild(t); ul.appendChild(li); });
+      box.appendChild(ul);
+      if (attr(v, "suite")) box.appendChild(el("p", "nx", "Ensuite : " + attr(v, "suite")));
+      g.appendChild(box);
+    });
+    wrap.appendChild(g); return wrap;
+  }
   function reprise(n) {
     var c = el("div", "card t-acc"); var top = el("div", "row between");
     top.appendChild(el("p", "h md", attr(n, "titre", "Reprise"))); if (attr(n, "depuis")) top.appendChild(el("span", "badge bg-warn c-warn", attr(n, "depuis"))); c.appendChild(top);
     if (attr(n, "voie1") != null) c.appendChild(render(mk("progress", { label: attr(n, "voie1label", "Voie 1 · cours"), value: attr(n, "voie1"), text: attr(n, "voie1text") })));
     if (attr(n, "voie2") != null) c.appendChild(render(mk("progress", { label: attr(n, "voie2label", "Voie 2 · socle maths"), value: attr(n, "voie2"), tone: "ok", text: attr(n, "voie2text") })));
-    var g = el("div", "grid"); g.style.gridTemplateColumns = "repeat(3,minmax(0,1fr))";
-    [["temps", "Temps cumulé", null], ["acquis", "Acquis", "ok"], ["consolider", "À consolider", "warn"]].forEach(function (x) { if (attr(n, x[0])) { var t = el("div", "tile"); t.appendChild(el("span", "tl", x[1])); t.appendChild(el("span", "tv" + (x[2] ? " c-" + x[2] : ""), attr(n, x[0]))); g.appendChild(t); } });
+    if (attr(n, "temps")) { var tp = el("p", "small sec"); tp.textContent = "Temps cumulé : " + attr(n, "temps"); c.appendChild(tp); }
+    var g = el("div", "grid"); g.style.gridTemplateColumns = "repeat(auto-fit,minmax(200px,1fr))";
+    [["acquis", "Acquis", "ok"], ["consolider", "À consolider", "warn"]].forEach(function (x) { if (attr(n, x[0])) { var t = el("div", "tile"); t.appendChild(el("span", "tl", x[1])); var cw = el("div", "chips"); splitList(attr(n, x[0])).forEach(function (it) { cw.appendChild(el("span", "chip bg-" + x[2] + " c-" + x[2], it)); }); t.appendChild(cw); g.appendChild(t); } });
     if (g.children.length) c.appendChild(g);
-    var info = el("div", "col"); info.style.gap = "2px";
-    if (attr(n, "point")) { var p1 = el("p", "small"); p1.appendChild(el("span", "sec", "Point de reprise : ")); p1.appendChild(document.createTextNode(attr(n, "point"))); info.appendChild(p1); }
-    if (attr(n, "aujourdhui")) { var p2 = el("p", "small"); p2.appendChild(el("span", "sec", "Aujourd'hui : ")); p2.appendChild(document.createTextNode(attr(n, "aujourdhui"))); info.appendChild(p2); }
-    if (info.children.length) c.appendChild(info);
-    var bt = el("div", "btns"); var durs = (attr(n, "durees", "30 min|1 h|2 h")).split("|");
-    durs.forEach(function (d) { var b = el("button", "btn ghost", "J'ai " + d.trim() + " ↗"); b.type = "button"; b.onclick = function () { send("J'ai " + d.trim() + ", on commence. Il est " + now() + "."); b.parentNode.appendChild(el("span", "sent", "Envoyé")); }; bt.appendChild(b); });
+    if (attr(n, "point")) { var p1 = el("p", "small"); p1.appendChild(el("b", null, "Point de reprise : ")); p1.appendChild(document.createTextNode(attr(n, "point"))); c.appendChild(p1); }
+    if (attr(n, "aujourdhui")) { var pl = el("div", "plan"); pl.appendChild(el("p", "tl", "Plan d'aujourd'hui")); var st = el("div", "steps line"); splitList(attr(n, "aujourdhui")).forEach(function (it, i) { var s = el("div", "step"); s.appendChild(el("span", "sn", String(i + 1))); s.appendChild(el("div", "sc", it)); st.appendChild(s); }); pl.appendChild(st); c.appendChild(pl); }
+    var bt = el("div", "btns"); var durs = attr(n, "durees") ? attr(n, "durees").split(/[|,;]/).map(dur).filter(Boolean) : [];
+    if (!durs.length) { var go = el("button", "btn", attr(n, "bouton", "On commence ↗")); go.type = "button"; go.onclick = function () { send("On commence. Il est " + now() + "."); go.parentNode.appendChild(el("span", "sent", "Envoyé")); }; bt.appendChild(go); }
+    durs.forEach(function (d) { var b = el("button", "btn ghost", "J'ai " + d + " ↗"); b.type = "button"; b.onclick = function () { send("J'ai " + d + ", on commence. Il est " + now() + "."); b.parentNode.appendChild(el("span", "sent", "Envoyé")); }; bt.appendChild(b); });
     c.appendChild(bt); return kids(n, c);
   }
 
@@ -251,6 +293,11 @@
   function parse(src) {
     var s = src.trim(); if (!/^<(dil|lesson)\b/i.test(s)) s = "<dil>" + s + "</dil>";
     var xmlish = s.replace(/&(?!(?:[a-zA-Z]+|#\d+|#x[0-9a-fA-F]+);)/g, "&amp;");
+    /* attributs sans valeur (<row between>) : XML les refuse, on ajoute ="1" */
+    xmlish = xmlish.replace(/<([a-zA-Z][\w-]*)((?:\s+[\w:-]+(?:\s*=\s*(?:"[^"]*"|'[^']*'))?)*)\s*(\/?)>/g, function (m0, tag, attrs, sl) {
+      return "<" + tag + attrs.replace(/(\s+)([\w:-]+)(\s*=\s*(?:"[^"]*"|'[^']*'))?/g, function (m1, sp, nm, val) { return sp + nm + (val || '="1"'); }) + sl + ">"; });
+    /* balises vides courantes écrites sans / */
+    xmlish = xmlish.replace(/<(hr|br)(\s[^>]*)?>(?!\s*<\/\1>)/gi, function (m0, t, a) { return /\/$/.test(a || "") ? m0 : "<" + t + (a || "") + "/>"; });
     var doc = new DOMParser().parseFromString(xmlish, "application/xml");
     if (!doc.getElementsByTagName("parsererror").length) return doc.documentElement;
     var h = new DOMParser().parseFromString(s, "text/html"); return h.body.querySelector("dil,lesson") || h.body;
@@ -269,8 +316,12 @@
 
   function run() {
     injectCSS(document);
-    Array.prototype.forEach.call(document.querySelectorAll('script[type="text/dil"]'), mount);
+    var list = document.querySelectorAll('script[type="text/dil"]');
+    Array.prototype.forEach.call(list, mount);
+    if (list.length && document.querySelector(".dil")) Array.prototype.forEach.call(document.querySelectorAll(".dil-boot"), function (b) { b.remove(); });
   }
+  /* placeholder visible dès le chargement : l'hôte ne voit jamais une page de hauteur 0 */
+  try { var cs = document.currentScript; if (cs && cs.parentNode) { var boot = document.createElement("div"); boot.className = "dil-boot"; boot.setAttribute("aria-hidden", "true"); boot.style.cssText = "min-height:24px;font:13px system-ui,sans-serif;color:#888;padding:4px 0"; boot.textContent = "Chargement…"; cs.parentNode.insertBefore(boot, cs.nextSibling); } } catch (e) {}
 
   window.ProfDIL = { version: VERSION, run: run, render: function (src, target) { injectCSS(document); var o = render(parse(src)); (target || document.body).appendChild(o); renderMath(); return o; } };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", run); else run();

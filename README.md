@@ -42,7 +42,7 @@ Le balisage est du XML : fermer chaque balise (`<hr/>`), écrire `\lt` au lieu d
 | `qcm` | `q`, `prefix` (« Je choisis : »), `button`, `heure` ; enfants `<o send="…">` | QCM, bouton qui envoie la réponse |
 | `ask` | `q`, `placeholder`, `prefix`, `multiline`, `heure` | réponse libre envoyée au chat |
 | `buttons` | enfants `<btn send="…" heure>` | boutons qui envoient un message |
-| `reprise` | `titre`, `depuis`, `voie1`, `voie1text`, `voie2`, `temps`, `acquis`, `consolider`, `point`, `aujourdhui`, `durees` | écran de reprise ; les boutons envoient la durée ET l'heure locale |
+| `reprise` | `titre`, `depuis`, `voie1`, `voie1text`, `voie2`, `temps`, `acquis` et `consolider` (listes séparées par ·), `point`, `aujourdhui` (plan : « 1. … · 2. … »), `durees` (« 30 min\|1 h\|2 h » ou « 30,60,120 ») | écran de reprise : étiquettes de notions, plan numéroté, boutons qui envoient la durée ET l'heure locale |
 | `checkpoint` | `pos`, `start` (hh:mm), `seance`, `voie1`, `voie2`, `acquis`, `consolider` | point d'étape avec temps écoulé calculé |
 | `raw` | | HTML libre (dernier recours) |
 
