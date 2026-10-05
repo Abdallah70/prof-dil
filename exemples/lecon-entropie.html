@@ -1,0 +1,41 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;padding:16px;background:#fff}@media (prefers-color-scheme:dark){body{background:#262624}}</style>
+<script>window.sendPrompt=function(t){document.title='SENT:'+t}</script></head><body>
+<script src="../dil.js"></script>
+<script type="text/dil">
+<reprise titre="Reprise · Data Science" depuis="8 jours depuis le 27/09" voie1="0" voie1text="0 / 3 cours" voie2="12" temps="≈ 3 h" acquis="9" consolider="6" point="entropie de la pièce 90/10" aujourdhui="rappels, fin de l'entropie, puis cours 5"/>
+<h size="xl">Chapitre 3 · L'entropie</h>
+<card tone="acc">
+  <badge>Étape 2 sur 4</badge>
+  <h size="2xl">La pièce 90 / 10</h>
+  <p><b>Objectif :</b> mesurer la surprise moyenne d'une pièce truquée.</p>
+  <progress label="Progression du chapitre" value="50"/>
+</card>
+<p>Une pièce truquée tombe sur <b>Face 9 fois sur 10</b>. Chaque résultat t'apporte une quantité d'information <m>-\log_2 p</m>.</p>
+<row>
+  <dot color="#378ADD" letter="F" label="Face" sub="90 % · 0,152 bit"/>
+  <dot color="#EF9F27" letter="P" label="Pile" sub="10 % · 3,322 bits"/>
+</row>
+<f label="surprise moyenne = chaque probabilité × sa surprise">H = 0{,}9 \times 0{,}152 + 0{,}1 \times 3{,}322 \approx 0{,}47\ \text{bit}</f>
+<retiens>Une pièce prévisible apporte <b>moins d'1 bit</b> en moyenne : on sait déjà presque ce qui va sortir.</retiens>
+<tree q="Question 1 → Question 2" conclusion="Tu peux distinguer 4 possibilités.">
+  <branch label="Oui" tone="ok"><leaf>Oui → Oui</leaf><leaf>Oui → Non</leaf></branch>
+  <branch label="Non" tone="bad"><leaf>Non → Oui</leaf><leaf>Non → Non</leaf></branch>
+</tree>
+<steps>
+  <s><b>Le problème</b><sec>Quelle pièce est la plus imprévisible ?</sec></s>
+  <s><b>L'idée</b><sec>On mesure la surprise en bits.</sec></s>
+  <s><b>La formule</b><sec>On fait la moyenne des surprises.</sec></s>
+</steps>
+<table><tr><th>Issue</th><th>p</th><th>Surprise</th></tr><tr><td>Face</td><td>0,9</td><td>0,152 bit</td></tr><tr><td>Pile</td><td>0,1</td><td>3,322 bits</td></tr></table>
+<bars><bar label="Pièce 50/50" value="1" text="1 bit"/><bar label="Pièce 90/10" value="0.47" text="0,47 bit" tone="warn"/><bar label="Pièce truquée 100 %" value="0" text="0 bit" tone="neutral"/></bars>
+<card tone="acc">
+  <qcm q="Pourquoi la pièce 90/10 donne moins d'1 bit ?">
+    <o>Elle est très prévisible</o>
+    <o>On a fait une erreur de calcul</o>
+    <o>Pile est trop rare pour compter</o>
+  </qcm>
+</card>
+<ask q="À toi : quelle est l'entropie d'une pièce 50/50 ?" placeholder="Ton calcul" prefix="Ma réponse : "/>
+<checkpoint pos="Bloc 3 · Étape 2/4" start="18:40" seance="50" voie2="15" acquis="log₂, surprise" consolider="moyenne pondérée"/>
+</script>
+</body></html>
